@@ -8,7 +8,7 @@ import {createTheme} from '@mui/material/styles';
 import { themeSettings } from "theme";
 import { useMemo } from "react";
 import state from "state";
-
+import { Toaster } from "react-hot-toast";
 function App() {
 
 const mode = useSelector((state)=>state.mode);
@@ -17,6 +17,7 @@ const isAuth = Boolean(useSelector((state)=>state.token));
 
   return (
     <div className="app">
+      <div><Toaster/></div>
     <BrowserRouter>
     <ThemeProvider theme={theme}>
       <CssBaseline/>

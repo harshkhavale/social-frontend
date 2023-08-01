@@ -11,6 +11,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import SurfingIcon from '@mui/icons-material/Surfing';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import {
   Search,
   Message,
@@ -32,6 +33,8 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
+  const currentUser = useSelector((state) => state.user._id);
+
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
 
   const theme = useTheme();
@@ -44,7 +47,13 @@ const Navbar = () => {
   const fullName = `${user.firstName} ${user.lastName}`;
 
   return (
-    <FlexBetween padding="1rem 6%" backgroundColor={alt}>
+    
+    <FlexBetween sx={
+      isNonMobileScreens? ({
+        padding:"0.5rem 6%",    backgroundColor:alt 
+    }):({        padding:"0.2rem 6%", zIndex:"5", position:"fixed", width:"100%",  backgroundColor:alt
+  })
+    } >
       <FlexBetween gap="1.75rem">
         <LogoTitle
          color={theme.palette.primary.main}
@@ -114,11 +123,16 @@ const Navbar = () => {
           </FormControl>
         </FlexBetween>
       ) : (
+        <FlexBetween>
+        <IconButton onClick={()=>navigate(`/profile/${currentUser}`)}>
+<AccountCircleIcon/>
+        </IconButton>
         <IconButton
           onClick={() => setIsMobileMenuToggled(!isMobileMenuToggled)}
         >
           <Menu />
         </IconButton>
+        </FlexBetween>
       )}
 
       {/* MOBILE NAV */}

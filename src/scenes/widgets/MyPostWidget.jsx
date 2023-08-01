@@ -24,10 +24,14 @@ import WidgetWrapper from "components/WidgetWrapper";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setPost, setPosts } from "state";
+import { toast } from "react-hot-toast";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const MYPostWidget = ({ picturePath }) => {
   const dispatch = useDispatch();
   const [image, setImage] = useState();
+  const [process, setProcess] = useState(false);
+
   const [isImage, setIsImage] = useState(false);
   const [post, setPost] = useState("");
   const { palette } = useTheme();
@@ -38,6 +42,7 @@ const MYPostWidget = ({ picturePath }) => {
   const medium = palette.neutral.medium;
 
   const handlePost = async () => {
+    setProcess(true);
     const formData = new FormData();
     formData.append("userId", _id);
     formData.append("description", post);
@@ -46,15 +51,26 @@ const MYPostWidget = ({ picturePath }) => {
       formData.append("picturePath", image.name);
     }
 
-    const response = await fetch("https://social-backend-e21j.onrender.com/posts", {
-      method: "POST",
-      headers: { Authorization: `Bearer ${token}` },
-      body: formData,
-    });
+    const response = await fetch(
+      "https://social-backend-e21j.onrender.com/posts",
+      {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}` },
+        body: formData,
+      }
+    );
     const posts = await response.json();
-    dispatch(setPosts({ posts }));
-    setImage(null);
-    setPost("");
+    if (posts) {
+      toast.success("posted!");
+      setProcess(false);
+      dispatch(setPosts({ posts }));
+      setImage(null);
+      setPost("");
+    }
+    if(post.mesg){
+      toast.error("This didn't work.");
+
+    }
   };
   return (
     <WidgetWrapper>
@@ -185,10 +201,10 @@ const MYPostWidget = ({ picturePath }) => {
             color: "black",
             backgroundColor: palette.primary.main,
             borderRadius: "3rem",
-            "&:hover":{
+            "&:hover": {
               backgroundColor: palette.primary.main,
-              cursor:"pointer"
-            }
+              cursor: "pointer",
+            },
           }}
         >
           POST
