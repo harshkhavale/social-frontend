@@ -19,7 +19,7 @@ return(
                 Create Ad
             </Typography>
         </FlexBetween>
-        <img width={"100%"} height={"auto"}  src="https://social-backend-e21j.onrender.com/assets/foundation-containers-advertising-assortment.jpg" alt="ad" style={{
+        <img width={"100%"} height={"auto"}  src="http://localhost:3001/assets/foundation-containers-advertising-assortment.jpg" alt="ad" style={{
             borderRadius:"0.75rem",margin:"0.75rem 0"
         }} />
         <FlexBetween>

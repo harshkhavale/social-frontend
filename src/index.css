@@ -1,9 +1,20 @@
 
-  @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap');
-  @import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Happy+Monkey&display=swap');
 html,body,#root,.app{
 height: 100%;
 width: 100%;
-font-family: 'Rubik', sans-serif;
-  }
-  
+font-family: 'Poppins', sans-serif;  }
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px;
+}
+body{
+/* For Firefox */
+scrollbar-width: thin;
+scrollbar-color: #888 #f0f0f0;
+}

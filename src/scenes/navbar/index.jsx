@@ -9,9 +9,10 @@ import {
   FormControl,
   useTheme,
   useMediaQuery,
+  Icon,
 } from "@mui/material";
-import SurfingIcon from '@mui/icons-material/Surfing';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import SurfingIcon from "@mui/icons-material/Surfing";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import {
   Search,
   Message,
@@ -47,27 +48,41 @@ const Navbar = () => {
   const fullName = `${user.firstName} ${user.lastName}`;
 
   return (
-    
-    <FlexBetween sx={
-      isNonMobileScreens? ({
-        padding:"0.5rem 6%",    backgroundColor:alt 
-    }):({        padding:"0.2rem 6%", zIndex:"5", position:"fixed", width:"100%",  backgroundColor:alt
-  })
-    } >
+    <FlexBetween
+      sx={
+        isNonMobileScreens
+          ? {
+              padding: "0.5rem 6%",
+              backgroundColor: alt,
+            }
+          : {
+              padding: "0.2rem 6%",
+              zIndex: "5",
+              position: "fixed",
+              width: "100%",
+              backgroundColor: alt,
+            }
+      }
+    >
       <FlexBetween gap="1.75rem">
         <LogoTitle
-         color={theme.palette.primary.main}
-         textAlign={"baseline"}
-         onClick={() => navigate("/home")}
-         sx={{
- 
-           "&:hover": {
-             color: primaryLight,
-             cursor: "pointer",
-           },
-         }}
+          color={theme.palette.primary.main}
+          textAlign={"baseline"}
+          onClick={() => navigate("/home")}
+          sx={{
+            "&:hover": {
+              color: primaryLight,
+              cursor: "pointer",
+            },
+          }}
         >
-          Social<SurfingIcon />
+          surf
+          <SurfingIcon sx={{
+            fontSize:'20px',
+            color:"white",
+            
+
+          }} />
         </LogoTitle>
         {isNonMobileScreens && (
           <FlexBetween
@@ -94,7 +109,13 @@ const Navbar = () => {
               <LightMode sx={{ color: dark, fontSize: "25px" }} />
             )}
           </IconButton>
-          <Message sx={{ fontSize: "25px" }} />
+          <IconButton
+            onClick={() => {
+              navigate("/chats");
+            }}
+          >
+            <Message sx={{ fontSize: "25px" }} />
+          </IconButton>
           <Notifications sx={{ fontSize: "25px" }} />
           <Help sx={{ fontSize: "25px" }} />
           <FormControl variant="standard" value={fullName}>
@@ -124,14 +145,14 @@ const Navbar = () => {
         </FlexBetween>
       ) : (
         <FlexBetween>
-        <IconButton onClick={()=>navigate(`/profile/${currentUser}`)}>
-<AccountCircleIcon/>
-        </IconButton>
-        <IconButton
-          onClick={() => setIsMobileMenuToggled(!isMobileMenuToggled)}
-        >
-          <Menu />
-        </IconButton>
+          <IconButton onClick={() => navigate(`/profile/${currentUser}`)}>
+            <AccountCircleIcon />
+          </IconButton>
+          <IconButton
+            onClick={() => setIsMobileMenuToggled(!isMobileMenuToggled)}
+          >
+            <Menu />
+          </IconButton>
         </FlexBetween>
       )}
 

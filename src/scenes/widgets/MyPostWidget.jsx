@@ -52,7 +52,7 @@ const MYPostWidget = ({ picturePath }) => {
     }
 
     const response = await fetch(
-      "https://social-backend-e21j.onrender.com/posts",
+      "http://localhost:3001/posts",
       {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },

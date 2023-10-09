@@ -14,7 +14,7 @@ const FriendsListWidget = ({ userId }) => {
 
   const getFriends = async () => {
     const response = await fetch(
-      `https://social-backend-e21j.onrender.com/users/${userId}/friends`,
+      `http://localhost:3001/users/${userId}/friends`,
       {
         method: "GET",
         headers: {

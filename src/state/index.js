@@ -4,7 +4,12 @@ const initialState = {
   mode: "light",
   user: null,
   token: null,
+  currentConversation: null,
+  selectedChat: null,
+  currentRoom: null,
   posts: [],
+  chats: [],
+  conversations: [],
 };
 
 export const authSlice = createSlice({
@@ -17,6 +22,15 @@ export const authSlice = createSlice({
     setLogin: (state, action) => {
       state.user = action.payload.user;
       state.token = action.payload.token;
+    },
+    setCurrentConversation: (state, action) => {
+      state.currentConversation = action.payload.currentConversation;
+    },
+    setCurrentRoom: (state, action) => {
+      state.currentRoom = action.payload.currentRoom;
+    },
+    setSelectedChat: (state, action) => {
+      state.selectedChat = action.payload.selectedChat;
     },
     setLogout: (state) => {
       state.user = null;
@@ -39,9 +53,48 @@ export const authSlice = createSlice({
       });
       state.posts = updatedPosts;
     },
+    setConversation: (state, action) => {
+      const updatedConversations = state.conversations.map((conversation) => {
+        if (conversation._id === action.payload.conversation._id)
+          return action.payload.conversation;
+      });
+      state.conversations = updatedConversations;
+    },
+    setConversations: (state, action) => {
+      state.conversations = action.payload.conversations;
+    },
+    setChat: (state, action) => {
+      const updatedChats = state.chats.map((chat) => {
+        if (chat._id === action.payload.chat._id) {
+          return {
+            ...chat,
+            ...action.payload.chat,
+          };
+        }
+
+        return chat;
+      });
+      state.chats = updatedChats;
+    },
+    setChats: (state, action) => {
+      state.chats = action.payload.chats;
+    },
   },
 });
 
-export const { setMode, setLogin, setLogout, setFriends, setPosts, setPost } =
-  authSlice.actions;
+export const {
+  setMode,
+  setLogin,
+  setLogout,
+  setFriends,
+  setPosts,
+  setPost,
+  setChat,
+  setChats,
+  setConversation,
+  setConversations,
+  setCurrentConversation,
+  setCurrentRoom,
+  setSelectedChat
+} = authSlice.actions;
 export default authSlice.reducer;

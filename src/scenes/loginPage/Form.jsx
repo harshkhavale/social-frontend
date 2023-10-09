@@ -68,7 +68,7 @@ const Form = () => {
     formData.append("picturePath", values.picture.name);
 
     const savedUserResponse = await fetch(
-      "https://social-backend-e21j.onrender.com/auth/register",
+      "http://localhost:3001/auth/register",
       {
         method: "POST",
         body: formData,
@@ -93,7 +93,7 @@ const Form = () => {
     setProgress(true);
 
     const loggedInResponse = await fetch(
-      "https://social-backend-e21j.onrender.com/auth/login",
+      "http://localhost:3001/auth/login",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
